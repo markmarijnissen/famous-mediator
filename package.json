@@ -1,0 +1,24 @@
+{
+  "name": "famous-mediator",
+  "version": "0.1.0",
+  "description": "Utilities for a mediator design pattern in Famo.us",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markmarijnissen/famous-mediator.git"
+  },
+  "keywords": [
+    "famous",
+    "mediator",
+    "design pattern"
+  ],
+  "author": "Mark Marijnissen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markmarijnissen/famous-mediator/issues"
+  },
+  "homepage": "https://github.com/markmarijnissen/famous-mediator"
+}

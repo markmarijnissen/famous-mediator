@@ -1,0 +1,23 @@
+{
+  "name": "famous-mediator",
+  "main": "index.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/markmarijnissen/famous-mediator",
+  "authors": [
+    "Mark Marijnissen <markmarijnissen@gmail.com>"
+  ],
+  "description": "Utilities for a mediator design pattern in Famo.us",
+  "keywords": [
+    "famous",
+    "mediator",
+    "design pattern"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
