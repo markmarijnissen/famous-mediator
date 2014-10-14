@@ -15,7 +15,7 @@ Install using bower or npm
 
 Imagine you have a `Router` module and a `pages` module:
 
-*Router.js*
+*1. Router.js - does it's thing and doesn't know about other modules*
 ```javascript
   function Router(){
     // blablabla
@@ -25,7 +25,7 @@ Imagine you have a `Router` module and a `pages` module:
   }
 ```
 
-*PageController.js*
+*2. PageController.js - displays pages but doesn't know about any routes!*
 ```javascript
   function PageController(){
     // blablabla
@@ -35,20 +35,25 @@ Imagine you have a `Router` module and a `pages` module:
   }
 ```
 
-*RouteMediator.js*
+*3. RouteMediator.js - couples the router and pages together!*
 ```javascript
   var Mediator = require('famous-mediator');
   var Engine = require('famous/core/Engine');
 
-  // Mediator emits the 'router' event
   Engine.on('created:Router',function(router){
-    // imagine your router emits a 'change' event
     router.on('change',function(name){
-      // then we couple router to the pages!
       Mediator.pages.setPage(name);
     });
   });
 ```
+
+## Benefits
+
+Using the mediator pattern to decouple modules
+
+* Promotes clean, reusable modules
+* Clear seperation of concerns - no more sneaky business logic in your templates!
+* Is the perfect place for hacks, experiments, monkey-patches and workarounds. And because all of your "bad" code is in the Mediators, your actual code base stays clean! (True story!)
 
 ## Usage
 
