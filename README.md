@@ -11,12 +11,48 @@ Install using bower or npm
   bower install famous-mediator
   npm install famous-mediator
 ```
+## Example
+
+Imagine you have a `Router` module and a `pages` module:
+
+*Router.js*
+```javascript
+  function Router(){
+    // blablabla
+    this.name = 'router';
+    Engine.emit('created',this) // broadcast created event
+    // blablabla
+  }
+```
+
+*PageController.js*
+```javascript
+  function PageController(){
+    // blablabla
+    this.name = 'pages';   // name your module
+    Engine.emit('created',this) // broadcast created event
+    // blablabla
+  }
+```
+
+*RouteMediator.js*
+```javascript
+  var Mediator = require('famous-mediator');
+  var Engine = require('famous/core/Engine');
+
+  // Mediator emits the 'router' event
+  Engine.on('created:Router',function(router){
+    // imagine your router emits a 'change' event
+    router.on('change',function(name){
+      // then we couple router to the pages!
+      Mediator.pages.setPage(name);
+    });
+  });
+```
 
 ## Usage
 
-The Famo.us Engine is used as a global eventbus to announce creation of modules.
-
-If you want to register a module, simple call in your constructor function:
+The Famo.us Engine is used as a global eventbus to announce creation of modules. If you want to register a module, simple call in your constructor function:
 
 ```javascript
   Engine.emit('created',this)
@@ -43,18 +79,6 @@ The idea is to write Mediator singletons that couple modules together by:
 - calling the public API
 - triggering events on a module
 
-For example, imagine you have a `Router` module and a `pages` module:
-
-```
-  var Mediator = require('famous-mediator');
-  var Engine = require('famous/core/Engine');
-
-  Engine.on('created:Router',function(router){
-    router.on('change',function(name){
-      Mediator.pages.set(name);
-    });
-  });
-```
 
 ## Contribute
 
