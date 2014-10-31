@@ -21,7 +21,7 @@ define(function(require, exports, module) {
   ```
     var Mediator = require('famous-mediator');
     Mediator.xxxx
-    Engine.on('created:xxxx',function(xxxx){ .... });
+    Mediator.on('created:xxxx',function(xxxx){ .... });
   ```
 
   The idea is to write Mediator singletons that couple modules together by:
@@ -34,9 +34,8 @@ define(function(require, exports, module) {
 
   ```
     var Mediator = require('famous-mediator');
-    var Engine = require('famous/core/Engine');
-
-    Engine.on('created:Router',function(router){
+    
+    Mediator.on('created:Router',function(router){
       router.on('change',function(name){
         Mediator.pages.set(name);
       });
@@ -47,10 +46,11 @@ define(function(require, exports, module) {
   var Engine = require('famous/core/Engine');
 
   // cache for all modules that are created
-  var modules = window.Modules = {};
+  var Mediator = window.Mediator = {};
+  Mediator.on = Engine.on; 
 
   // when a module is created...
-  Engine.on('created',function(module){
+  Mediator.on('created',function(module){
     
     // try to find a name
     var name;
@@ -62,10 +62,10 @@ define(function(require, exports, module) {
 
     // when name is found
     if(name) {
-      modules[name] = module;               // store module for later reference      
+      Mediator[name] = module;               // store module for later reference      
       Engine.emit('created:'+name,module);  // broadcast module creation
     }
   });
 
-  module.exports = modules;
+  module.exports = Mediator;
 });

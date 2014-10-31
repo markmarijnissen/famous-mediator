@@ -37,10 +37,9 @@ Imagine you have a `Router` module and a `pages` module:
 
 *3. RouteMediator.js - couples the router and pages together!*
 ```javascript
-  var Mediator = require('famous-mediator');
-  var Engine = require('famous/core/Engine');
+  var Mediator = require('famous-mediator');;
 
-  Engine.on('created:Router',function(router){
+  Mediator.on('created:Router',function(router){
     router.on('change',function(name){
       Mediator.pages.setPage(name);
     });
@@ -75,7 +74,7 @@ The module with the name `xxxx` is accessible as follows:
 ```
   var Mediator = require('famous-mediator');
   Mediator.xxxx
-  Engine.on('created:xxxx',function(xxxx){ .... });
+  Mediator.on('created:xxxx',function(xxxx){ .... });
 ```
 
 The idea is to write Mediator singletons that couple modules together by:
@@ -84,6 +83,11 @@ The idea is to write Mediator singletons that couple modules together by:
 - calling the public API
 - triggering events on a module
 
+## Changelog
+
+### 0.1.1 (31/10/2014)
+
+* Aliased `Mediator.on` to `Engine.on`.
 
 ## Contribute
 
