@@ -15,10 +15,18 @@
     "mediator",
     "design pattern"
   ],
-  "author": "Mark Marijnissen",
+  "author": {
+    "name": "Mark Marijnissen"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/markmarijnissen/famous-mediator/issues"
   },
-  "homepage": "https://github.com/markmarijnissen/famous-mediator"
+  "homepage": "https://github.com/markmarijnissen/famous-mediator",
+  "readme": "famous-mediator\n===============\n\nA design pattern that decouples modules using the mediator pattern.\n\n## Getting started\n\nInstall using bower or npm\n\n```bash\n  bower install famous-mediator\n  npm install famous-mediator\n```\n## Example\n\nImagine you have a `Router` module and a `pages` module:\n\n*1. Router.js - does it's thing and doesn't know about other modules*\n```javascript\n  function Router(){\n    // blablabla\n    this.name = 'router';\n    Engine.emit('created',this) // broadcast created event\n    // blablabla\n  }\n```\n\n*2. PageController.js - displays pages but doesn't know about any routes!*\n```javascript\n  function PageController(){\n    // blablabla\n    this.name = 'pages';   // name your module\n    Engine.emit('created',this) // broadcast created event\n    // blablabla\n  }\n```\n\n*3. RouteMediator.js - couples the router and pages together!*\n```javascript\n  var Mediator = require('famous-mediator');;\n\n  Mediator.on('created:Router',function(router){\n    router.on('change',function(name){\n      Mediator.pages.setPage(name);\n    });\n  });\n```\n\n## Benefits\n\nUsing the mediator pattern to decouple modules\n\n* Promotes clean, reusable modules\n* Clear seperation of concerns - no more sneaky business logic in your templates!\n* Is the perfect place for hacks, experiments, monkey-patches and workarounds. And because all of your \"bad\" code is in the Mediators, your actual code base stays clean! (True story!)\n\n## Usage\n\nThe Famo.us Engine is used as a global eventbus to announce creation of modules. If you want to register a module, simple call in your constructor function:\n\n```javascript\n  Engine.emit('created',this)\n````\n\nA module MUST have a name to be registered. This name can be found on:\n\n- this.options.id = 'xxxx'\n- this.options.name = 'xxxx'\n- this.id = 'xxxx'\n- this.name = 'xxxx'\n\nThe module with the name `xxxx` is accessible as follows:\n\n```\n  var Mediator = require('famous-mediator');\n  Mediator.xxxx\n  Mediator.on('created:xxxx',function(xxxx){ .... });\n```\n\nThe idea is to write Mediator singletons that couple modules together by:\n\n- listening to the events they emit\n- calling the public API\n- triggering events on a module\n\n## Changelog\n\n### 0.1.1 (31/10/2014)\n\n* Aliased `Mediator.on` to `Engine.on`.\n\n## Contribute\n\nFeel free to contribute to this project in any way. The easiest way to support this project is by giving it a star.\n\n## Contact\n-   @markmarijnissen\n-   http://www.madebymark.nl\n-   info@madebymark.nl\n\n© 2014 - Mark Marijnissen",
+  "readmeFilename": "README.md",
+  "gitHead": "9d83c4f9c64cea45cd600904cf644cdcb8b7543e",
+  "_id": "famous-mediator@0.1.1",
+  "_shasum": "d90327b410d015baf08fa9f2d33648bad330a0d3",
+  "_from": "famous-mediator@"
 }
