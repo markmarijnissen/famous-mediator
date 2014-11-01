@@ -1,0 +1,104 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose publish [ '.' ]
+5 verbose cache add [ '.', null ]
+6 verbose cache add name=undefined spec="." args=[".",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: '.',
+7 verbose parsed url   path: '.',
+7 verbose parsed url   href: '.' }
+8 silly lockFile 3a52ce78- .
+9 verbose lock . /Users/mark/.npm/3a52ce78-.lock
+10 verbose tar pack [ '/Users/mark/.npm/famous-mediator/0.1.1/package.tgz', '.' ]
+11 verbose tarball /Users/mark/.npm/famous-mediator/0.1.1/package.tgz
+12 verbose folder .
+13 info prepublish famous-mediator@0.1.1
+14 silly lockFile 1f1177db-tar tar://.
+15 verbose lock tar://. /Users/mark/.npm/1f1177db-tar.lock
+16 silly lockFile 4d189c97-amous-mediator-0-1-1-package-tgz tar:///Users/mark/.npm/famous-mediator/0.1.1/package.tgz
+17 verbose lock tar:///Users/mark/.npm/famous-mediator/0.1.1/package.tgz /Users/mark/.npm/4d189c97-amous-mediator-0-1-1-package-tgz.lock
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile 4d189c97-amous-mediator-0-1-1-package-tgz tar:///Users/mark/.npm/famous-mediator/0.1.1/package.tgz
+21 silly lockFile 4d189c97-amous-mediator-0-1-1-package-tgz tar:///Users/mark/.npm/famous-mediator/0.1.1/package.tgz
+22 silly lockFile efa1504c-pm-famous-mediator-0-1-1-package /Users/mark/.npm/famous-mediator/0.1.1/package
+23 verbose lock /Users/mark/.npm/famous-mediator/0.1.1/package /Users/mark/.npm/efa1504c-pm-famous-mediator-0-1-1-package.lock
+24 silly lockFile efa1504c-pm-famous-mediator-0-1-1-package /Users/mark/.npm/famous-mediator/0.1.1/package
+25 silly lockFile efa1504c-pm-famous-mediator-0-1-1-package /Users/mark/.npm/famous-mediator/0.1.1/package
+26 silly lockFile 3a52ce78- .
+27 silly lockFile 3a52ce78- .
+28 silly publish { name: 'famous-mediator',
+28 silly publish   version: '0.1.1',
+28 silly publish   description: 'Utilities for a mediator design pattern in Famo.us',
+28 silly publish   main: 'index.js',
+28 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+28 silly publish   repository:
+28 silly publish    { type: 'git',
+28 silly publish      url: 'https://github.com/markmarijnissen/famous-mediator.git' },
+28 silly publish   keywords: [ 'famous', 'mediator', 'design pattern' ],
+28 silly publish   author: { name: 'Mark Marijnissen' },
+28 silly publish   license: 'MIT',
+28 silly publish   bugs: { url: 'https://github.com/markmarijnissen/famous-mediator/issues' },
+28 silly publish   homepage: 'https://github.com/markmarijnissen/famous-mediator',
+28 silly publish   readme: 'famous-mediator\n===============\n\nA design pattern that decouples modules using the mediator pattern.\n\n## Getting started\n\nInstall using bower or npm\n\n```bash\n  bower install famous-mediator\n  npm install famous-mediator\n```\n## Example\n\nImagine you have a `Router` module and a `pages` module:\n\n*1. Router.js - does it\'s thing and doesn\'t know about other modules*\n```javascript\n  function Router(){\n    // blablabla\n    this.name = \'router\';\n    Engine.emit(\'created\',this) // broadcast created event\n    // blablabla\n  }\n```\n\n*2. PageController.js - displays pages but doesn\'t know about any routes!*\n```javascript\n  function PageController(){\n    // blablabla\n    this.name = \'pages\';   // name your module\n    Engine.emit(\'created\',this) // broadcast created event\n    // blablabla\n  }\n```\n\n*3. RouteMediator.js - couples the router and pages together!*\n```javascript\n  var Mediator = require(\'famous-mediator\');;\n\n  Mediator.on(\'created:Router\',function(router){\n    router.on(\'change\',function(name){\n      Mediator.pages.setPage(name);\n    });\n  });\n```\n\n## Benefits\n\nUsing the mediator pattern to decouple modules\n\n* Promotes clean, reusable modules\n* Clear seperation of concerns - no more sneaky business logic in your templates!\n* Is the perfect place for hacks, experiments, monkey-patches and workarounds. And because all of your "bad" code is in the Mediators, your actual code base stays clean! (True story!)\n\n## Usage\n\nThe Famo.us Engine is used as a global eventbus to announce creation of modules. If you want to register a module, simple call in your constructor function:\n\n```javascript\n  Engine.emit(\'created\',this)\n````\n\nA module MUST have a name to be registered. This name can be found on:\n\n- this.options.id = \'xxxx\'\n- this.options.name = \'xxxx\'\n- this.id = \'xxxx\'\n- this.name = \'xxxx\'\n\nThe module with the name `xxxx` is accessible as follows:\n\n```\n  var Mediator = require(\'famous-mediator\');\n  Mediator.xxxx\n  Mediator.on(\'created:xxxx\',function(xxxx){ .... });\n```\n\nThe idea is to write Mediator singletons that couple modules together by:\n\n- listening to the events they emit\n- calling the public API\n- triggering events on a module\n\n## Changelog\n\n### 0.1.1 (31/10/2014)\n\n* Aliased `Mediator.on` to `Engine.on`.\n\n## Contribute\n\nFeel free to contribute to this project in any way. The easiest way to support this project is by giving it a star.\n\n## Contact\n-   @markmarijnissen\n-   http://www.madebymark.nl\n-   info@madebymark.nl\n\n© 2014 - Mark Marijnissen',
+28 silly publish   readmeFilename: 'README.md',
+28 silly publish   gitHead: '9d83c4f9c64cea45cd600904cf644cdcb8b7543e',
+28 silly publish   _id: 'famous-mediator@0.1.1',
+28 silly publish   _shasum: '36307678f389ca9b3ac92af17f45e9178bbe71a4',
+28 silly publish   _from: '.' }
+29 verbose request where is /famous-mediator
+30 verbose request registry https://registry.npmjs.org/
+31 verbose request id 4ec043e0f76fcd2e
+32 verbose url raw /famous-mediator
+33 verbose url resolving [ 'https://registry.npmjs.org/', './famous-mediator' ]
+34 verbose url resolved https://registry.npmjs.org/famous-mediator
+35 verbose request where is https://registry.npmjs.org/famous-mediator
+36 info trying registry request attempt 1 at 15:24:37
+37 http PUT https://registry.npmjs.org/famous-mediator
+38 http 403 https://registry.npmjs.org/famous-mediator
+39 verbose headers { date: 'Sat, 01 Nov 2014 14:24:39 GMT',
+39 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+39 verbose headers   'content-type': 'application/json',
+39 verbose headers   'cache-control': 'max-age=60',
+39 verbose headers   'content-length': '5415',
+39 verbose headers   'accept-ranges': 'bytes',
+39 verbose headers   via: '1.1 varnish',
+39 verbose headers   'x-served-by': 'cache-ams4143-AMS',
+39 verbose headers   'x-cache': 'MISS',
+39 verbose headers   'x-cache-hits': '0',
+39 verbose headers   'x-timer': 'S1414851878.501045,VS0,VE607',
+39 verbose headers   'keep-alive': 'timeout=10, max=50',
+39 verbose headers   connection: 'Keep-Alive' }
+40 error publish Failed PUT 403
+41 error Error: forbidden cannot modify pre-existing version: 0.1.1
+41 error old={"name":"famous-mediator","version":"0.1.1","description":"Utilities for a mediator design pattern in Famo.us","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"repository":{"type":"git","url":"https://github.com/markmarijnissen/famous-mediator.git"},"keywords":["famous","mediator","design pattern"],"author":{"name":"Mark Marijnissen"},"license":"MIT","bugs":{"url":"https://github.com/markmarijnissen/famous-mediator/issues"},"homepage":"https://github.com/markmarijnissen/famous-mediator","gitHead":"9d83c4f9c64cea45cd600904cf644cdcb8b7543e","_id":"famous-mediator@0.1.1","_shasum":"d90327b410d015baf08fa9f2d33648bad330a0d3","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"markmarijnissen","email":"info@madebymark.nl"},"maintainers":[{"name":"markmarijnissen","email":"info@madebymark.nl"}],"dist":{"shasum":"d90327b410d015baf08fa9f2d33648bad330a0d3","tarball":"http://registry.npmjs.org/famous-mediator/-/famous-mediator-0.1.1.tgz"}}
+41 error new={"name":"famous-mediator","version":"0.1.1","description":"Utilities for a mediator design pattern in Famo.us","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"repository":{"type":"git","url":"https://github.com/markmarijnissen/famous-mediator.git"},"keywords":["famous","mediator","design pattern"],"author":{"name":"Mark Marijnissen"},"license":"MIT","bugs":{"url":"https://github.com/markmarijnissen/famous-mediator/issues"},"homepage":"https://github.com/markmarijnissen/famous-mediator","readme":"famous-mediator\u000a===============\u000a\u000aA design pattern that decouples modules using the mediator pattern.\u000a\u000a## Getting started\u000a\u000aInstall using bower or npm\u000a\u000a```bash\u000a  bower install famous-mediator\u000a  npm install famous-mediator\u000a```\u000a## Example\u000a\u000aImagine you have a `Router` module and a `pages` module:\u000a\u000a*1. Router.js - does it's thing and doesn't know about other modules*\u000a```javascript\u000a  function Router(){\u000a    // blablabla\u000a    this.name = 'router';\u000a    Engine.emit('created',this) // broadcast created event\u000a    // blablabla\u000a  }\u000a```\u000a\u000a*2. PageController.js - displays pages but doesn't know about any routes!*\u000a```javascript\u000a  function PageController(){\u000a    // blablabla\u000a    this.name = 'pages';   // name your module\u000a    Engine.emit('created',this) // broadcast created event\u000a    // blablabla\u000a  }\u000a```\u000a\u000a*3. RouteMediator.js - couples the router and pages together!*\u000a```javascript\u000a  var Mediator = require('famous-mediator');;\u000a\u000a  Mediator.on('created:Router',function(router){\u000a    router.on('change',function(name){\u000a      Mediator.pages.setPage(name);\u000a    });\u000a  });\u000a```\u000a\u000a## Benefits\u000a\u000aUsing the mediator pattern to decouple modules\u000a\u000a* Promotes clean, reusable modules\u000a* Clear seperation of concerns - no more sneaky business logic in your templates!\u000a* Is the perfect place for hacks, experiments, monkey-patches and workarounds. And because all of your \"bad\" code is in the Mediators, your actual code base stays clean! (True story!)\u000a\u000a## Usage\u000a\u000aThe Famo.us Engine is used as a global eventbus to announce creation of modules. If you want to register a module, simple call in your constructor function:\u000a\u000a```javascript\u000a  Engine.emit('created',this)\u000a````\u000a\u000aA module MUST have a name to be registered. This name can be found on:\u000a\u000a- this.options.id = 'xxxx'\u000a- this.options.name = 'xxxx'\u000a- this.id = 'xxxx'\u000a- this.name = 'xxxx'\u000a\u000aThe module with the name `xxxx` is accessible as follows:\u000a\u000a```\u000a  var Mediator = require('famous-mediator');\u000a  Mediator.xxxx\u000a  Mediator.on('created:xxxx',function(xxxx){ .... });\u000a```\u000a\u000aThe idea is to write Mediator singletons that couple modules together by:\u000a\u000a- listening to the events they emit\u000a- calling the public API\u000a- triggering events on a module\u000a\u000a## Changelog\u000a\u000a### 0.1.1 (31/10/2014)\u000a\u000a* Aliased `Mediator.on` to `Engine.on`.\u000a\u000a## Contribute\u000a\u000aFeel free to contribute to this project in any way. The easiest way to support this project is by giving it a star.\u000a\u000a## Contact\u000a-   @markmarijnissen\u000a-   http://www.madebymark.nl\u000a-   info@madebymark.nl\u000a\u000a© 2014 - Mark Marijnissen","readmeFilename":"README.md","gitHead":"9d83c4f9c64cea45cd600904cf644cdcb8b7543e","_id":"famous-mediator@0.1.1","_shasum":"36307678f389ca9b3ac92af17f45e9178bbe71a4","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"markmarijnissen","email":"info@madebymark.nl"},"maintainers":[{"name":"markmarijnissen","email":"info@madebymark.nl"}],"dist":{"shasum":"36307678f389ca9b3ac92af17f45e9178bbe71a4","tarball":"http://registry.npmjs.org/famous-mediator/-/famous-mediator-0.1.1.tgz"}}: famous-mediator
+41 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
+41 error     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
+41 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:236:22)
+41 error     at Request.emit (events.js:98:17)
+41 error     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+41 error     at Request.emit (events.js:117:20)
+41 error     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+41 error     at IncomingMessage.emit (events.js:117:20)
+41 error     at _stream_readable.js:943:16
+41 error     at process._tickCallback (node.js:419:13)
+42 error If you need help, you may report this *entire* log,
+42 error including the npm and node versions, at:
+42 error     <http://github.com/npm/npm/issues>
+43 error System Darwin 13.4.0
+44 error command "node" "/usr/local/bin/npm" "publish"
+45 error cwd /Users/mark/dev/tinmenrc/node_modules/famous-mediator
+46 error node -v v0.10.32
+47 error npm -v 1.4.28
+48 verbose exit [ 1, true ]

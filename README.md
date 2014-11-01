@@ -143,7 +143,7 @@ Keep your codebase clean and only add hacks in your mediators.
 
 ## Changelog
 
-### 0.1.1 (1/10/2014)
+### 0.2.0 (1/10/2014)
 
 * Added `Mediator.ready` and `Mediator.on`
 * Updated README.
