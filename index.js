@@ -30,14 +30,14 @@ define(function(require, exports, module) {
     } else {
       name = module.id || module.name;
     }
-
+    
     // ready name is found
     if(name) {
       // store module
       Modules[name] = module;
 
-      // Check callbacks that are waiting
-      CallbackList.forEach(function(item,callbackIndex){
+      for(var callbackIndex = CallbackList.length-1; callbackIndex >= 0; callbackIndex--){
+        var item = CallbackList[callbackIndex];
         // it this callback waiting for current module?
         var moduleIndex = item.waitFor.indexOf(name);
         // if so...
@@ -54,7 +54,7 @@ define(function(require, exports, module) {
             CallbackList.splice(callbackIndex,1);
           }
         }
-      });
+      }
     }
   });
   

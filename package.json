@@ -1,6 +1,6 @@
 {
   "name": "famous-mediator",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Utilities for a mediator design pattern in Famo.us",
   "main": "index.js",
   "scripts": {

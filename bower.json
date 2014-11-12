@@ -1,7 +1,7 @@
 {
   "name": "famous-mediator",
   "main": "index.js",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/markmarijnissen/famous-mediator",
   "authors": [
     "Mark Marijnissen <markmarijnissen@gmail.com>"
